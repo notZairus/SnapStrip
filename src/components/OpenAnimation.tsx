@@ -4,8 +4,8 @@ function OpenAnimation() {
   return (
     <motion.div 
       className="absolute left-0 top-0 w-full h-full flex items-center justify-center" 
-      initial={{backgroundColor: "#000000"}}
-      exit={{backgroundColor: "#FFFFFF"}}
+      initial={{backgroundColor: "#000000", opacity: 1}}
+      exit={{ opacity: 0 }}
     >
       <motion.div 
         className="text-white flex text-5xl font-semibold"
@@ -22,7 +22,7 @@ function OpenAnimation() {
           y: -300
         }}
         transition={{
-          duration: 2,
+          duration: 1,
           type: "spring"
         }}
       >

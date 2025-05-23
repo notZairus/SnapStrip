@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence } from "motion/react";
 import OpenAnimation from './components/OpenAnimation';
-import Webcam from 'react-webcam';
+import MainInterface from './components/MainInterface';
 
 
 function App() {
@@ -20,6 +20,8 @@ function App() {
           <OpenAnimation />
         )}
       </AnimatePresence>
+
+      {!justStarted && <MainInterface />}
 
 
       
