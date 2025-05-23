@@ -11,6 +11,8 @@ function MainInterface() {
             videoConstraints={{
               facingMode: "user"
             }}
+            width={640}
+            height={480}
           />
         </div>
         <div className='flex-1'>
