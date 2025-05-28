@@ -22,9 +22,6 @@ function App() {
       </AnimatePresence>
 
       {!justStarted && <MainInterface />}
-
-
-      
     </>
   )
 }
