@@ -4,21 +4,17 @@ import { AnimatePresence, motion } from "motion/react";
 import Webcam from 'react-webcam';
 import ImageCanvas from "./ImageCanvas";
 import { nanoid } from "nanoid";
+import { useImageContext } from "../contexts/ImageContext";
+import type { Image } from "../contexts/ImageContext";
 
 
-type Image = {
-  imageSrc: string,
-  id: string
-}
 
-
-function MainInterface() {
+function MainInterface({ setIsStripCustomization }: { setIsStripCustomization: () => void}) {
   const webcamRef = useRef<Webcam>(null);
-  const [images, setImages] = useState<Image[]>([]);
+  const {images, setImages} = useImageContext(); 
   const [countdown, setCountdown] = useState<number | null>(null);
   const [taking, setTaking] = useState<boolean>(false);
   const [isAutoCapturing, setIsAutoCapturing] = useState<boolean>(false);
-
 
   function takePhoto() {
     setTaking(true);
@@ -41,6 +37,19 @@ function MainInterface() {
     setIsAutoCapturing(true);
     setCountdown(3);
   }
+
+  function stopAutoCapturing() {
+    setCountdown(null);
+    setIsAutoCapturing(false);
+  }
+
+  function deleteImage(img_id: string) {
+    stopAutoCapturing();
+    setImages(prev => (
+      prev.filter((img) => img.id !== img_id)
+    ))
+  } 
+
   
   useEffect(() => {
     if (countdown === null) {
@@ -74,22 +83,6 @@ function MainInterface() {
     }, 1000)
     
   }, [images]);
-
-  function stopAutoCapturing() {
-    setCountdown(null);
-    setIsAutoCapturing(false);
-  }
-
-  function deleteImage(img_id: string) {
-    stopAutoCapturing();
-    setImages(prev => (
-      prev.filter((img) => img.id !== img_id)
-    ))
-  } 
-
-  
-
-
 
 
   return (
@@ -150,37 +143,52 @@ function MainInterface() {
         </div>
         <div className='w-full h-20 flex items-center justify-center'>
           {
-            !isAutoCapturing 
-            ?
-              (
-                <motion.button
-                  className="text-white bg-blue-600 font-semibold px-6 py-2 text-lg rounded-lg"
-                  whileHover={{
-                    scale: 1.1
-                  }}
-                  whileTap={{
-                    scale: 0.9
-                  }}
-                  onClick={startCountdown}
-                >
-                  Start
-                </motion.button>
-              ) 
-            :
-              (
-                <motion.button
-                  className="text-white bg-red-600 font-semibold px-6 py-2 text-lg rounded-lg"
-                  whileHover={{
-                    scale: 1.1
-                  }}
-                  whileTap={{
-                    scale: 0.9
-                  }}
-                  onClick={stopAutoCapturing}
-                >
-                  Stop Auto Capture
-                </motion.button>
-              ) 
+            !isAutoCapturing && images.length < 4 && (
+              <motion.button
+                className="text-white bg-blue-600 font-semibold px-6 py-2 text-lg rounded-lg"
+                whileHover={{
+                  scale: 1.1
+                }}
+                whileTap={{
+                  scale: 0.9
+                }}
+                onClick={startCountdown}
+              >
+                Start
+              </motion.button>
+            ) 
+          }
+          {
+            isAutoCapturing && (
+              <motion.button
+                className="text-white bg-red-600 font-semibold px-6 py-2 text-lg rounded-lg"
+                whileHover={{
+                  scale: 1.1
+                }}
+                whileTap={{
+                  scale: 0.9
+                }}
+                onClick={stopAutoCapturing}
+              >
+                Stop Auto Capture
+              </motion.button>
+            ) 
+          }
+          {
+            images.length >= 0 && (
+              <motion.button
+                className="text-white bg-green-600 font-semibold px-6 py-2 text-lg rounded-lg"
+                whileHover={{
+                  scale: 1.1
+                }}
+                whileTap={{
+                  scale: 0.9
+                }}
+                onClick={() => setIsStripCustomization(true)}
+              >
+                Next Stage
+              </motion.button>
+            )
           }
         </div>
       </div>
