@@ -9,7 +9,7 @@ import type { Image } from "../contexts/ImageContext";
 
 
 
-function MainInterface({ setIsStripCustomization }: { setIsStripCustomization: () => void}) {
+function MainInterface({ setIsStripCustomization }: {setIsStripCustomization : React.Dispatch<React.SetStateAction<boolean>>}) {
   const webcamRef = useRef<Webcam>(null);
   const {images, setImages} = useImageContext(); 
   const [countdown, setCountdown] = useState<number | null>(null);
