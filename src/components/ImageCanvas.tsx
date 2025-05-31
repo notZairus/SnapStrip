@@ -31,7 +31,7 @@ function ImageCanvas({ imageSrc, handleDelete }: ImageCanvasProps) {
 
   return (
     <div 
-      className='w-[400px] aspect-video rounded-xl relative bg-red-400 flex'
+      className='lg:w-[400px] w-full aspect-video rounded-xl relative bg-red-400 flex'
     >
       <canvas ref={canvasRef} className='flex-1 w-full h-full rounded-xl'/>
       <p 

@@ -8,10 +8,11 @@ export interface Image {
 interface ImageContextType {
   images: Image[],
   setImages: React.Dispatch<React.SetStateAction<Image[]>>,
+  name?: string
 }
 
 
-export const ImageContext = createContext<ImageContextType|undefined>(undefined);
+const ImageContext = createContext<ImageContextType|undefined>(undefined);
 
 export function ImageContextProvider({ children }: { children: ReactNode }): ReactNode {
   const [images, setImages] = useState<Image[]>([]);

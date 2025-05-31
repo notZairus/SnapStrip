@@ -49,7 +49,6 @@ function MainInterface({ setIsStripCustomization }: {setIsStripCustomization : R
       prev.filter((img) => img.id !== img_id)
     ))
   } 
-
   
   useEffect(() => {
     if (countdown === null) {
@@ -86,9 +85,9 @@ function MainInterface({ setIsStripCustomization }: {setIsStripCustomization : R
 
 
   return (
-    <div className="w-screen bg-white box-border p-8 flex gap-4 flex-col lg:flex-row py-12">
-      <div className='flex-1 flex flex-col items-center justify-start gap-8'>
-        <div className='w-4/5 aspect-video flex items-center justify-center overflow-hidden'>
+    <div className="w-screen box-border p-8 gap-12 flex-col lg:flex-row py-12 flex items-center lg:items-start justify-center">
+      <div className='w-full lg:w-1/2 flex flex-col items-center justify-start gap-8'>
+        <div className='w-full aspect-video flex items-center justify-center overflow-hidden'>
           <div className="relative rounded-xl w-full h-full flex items-center justify-center">
             <Webcam 
               className='rounded-xl w-full h-full object-cover'
@@ -141,32 +140,51 @@ function MainInterface({ setIsStripCustomization }: {setIsStripCustomization : R
             </AnimatePresence>
           </div>
         </div>
-        <div className='w-full h-20 flex items-center justify-center'>
+        <div className='w-full flex items-center justify-center gap-4'>
           {
             !isAutoCapturing && images.length < 4 && (
               <motion.button
-                className="text-white bg-blue-600 font-semibold px-6 py-2 text-lg rounded-lg"
+                className="text-white bg-blue-600 px-6 py-2 rounded-lg flex-1 text-2xl"
+                initial={{
+                  scale: 0.8
+                }}
+                animate={{
+                  scale: 1
+                }}
                 whileHover={{
-                  scale: 1.1
+                  scale: 1.03
                 }}
                 whileTap={{
                   scale: 0.9
+                }}
+                transition={{
+                  duration: 0.5
                 }}
                 onClick={startCountdown}
               >
-                Start
+                Start Auto Capture
               </motion.button>
             ) 
           }
+
           {
             isAutoCapturing && (
               <motion.button
-                className="text-white bg-red-600 font-semibold px-6 py-2 text-lg rounded-lg"
+                className="text-white bg-red-600 px-6 py-2 rounded-lg flex-1 text-2xl"
+                initial={{
+                  scale: 0.8
+                }}
+                animate={{
+                  scale: 1
+                }}
                 whileHover={{
-                  scale: 1.1
+                  scale: 1.03
                 }}
                 whileTap={{
                   scale: 0.9
+                }}
+                transition={{
+                  duration: 0.5
                 }}
                 onClick={stopAutoCapturing}
               >
@@ -174,25 +192,61 @@ function MainInterface({ setIsStripCustomization }: {setIsStripCustomization : R
               </motion.button>
             ) 
           }
+         
           {
-            images.length >= 0 && (
+            !isAutoCapturing && images.length < 4 && (
               <motion.button
-                className="text-white bg-green-600 font-semibold px-6 py-2 text-lg rounded-lg"
+                className="text-white bg-green-600 px-6 py-2 rounded-lg flex-1 text-2xl"
+                initial={{
+                  scale: 0.8
+                }}
+                animate={{
+                  scale: 1
+                }}
                 whileHover={{
-                  scale: 1.1
+                  scale: 1.03
                 }}
                 whileTap={{
                   scale: 0.9
                 }}
+                transition={{
+                  duration: 0.5
+                }}
+                onClick={takePhoto}
+              >
+                Capture
+              </motion.button>
+            )
+          }
+          
+          {
+            !isAutoCapturing && images.length >= 4 && (
+              <motion.button
+                className="text-white bg-green-600 px-6 py-2 rounded-lg flex-1 text-2xl"
+                initial={{
+                  scale: 0.8
+                }}
+                animate={{
+                  scale: 1
+                }}
+                whileHover={{
+                  scale: 1.03
+                }}
+                whileTap={{
+                  scale: 0.9
+                }}
+                transition={{
+                  duration: 0.5
+                }}
                 onClick={() => setIsStripCustomization(true)}
               >
-                Next Stage
+                Next
               </motion.button>
             )
           }
         </div>
       </div>
-      <div className='w-full lg:w-2/6 overflow-y-auto flex justify-center max-h-[600px]'>
+      <div className='w-full lg:w-2/6 overflow-y-auto flex justify-center'>
         <div className="w-full gap-4 flex flex-col items-center">
           {
             images.map((img) => 

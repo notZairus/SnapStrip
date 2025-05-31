@@ -9,6 +9,7 @@ function StripCustomization() {
   const [frameColor, setFrameColor] = useState<string>("white");
   const [bottomText, setBottomText] = useState<string>("Bottom Text");
   const divRef = useRef(null);
+
   
   async function downloadStrip() {
 
