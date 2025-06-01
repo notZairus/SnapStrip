@@ -34,7 +34,7 @@ function StripCustomization({ setIsStripCustomization }: { setIsStripCustomizati
   }
 
   return (
-    <div className="canvas-container w-full min-h-screen flex justify-center items-center bg-gray-700 gap-40 py-12">
+    <div className="canvas-container w-full min-h-screen flex justify-center items-center bg-gray-700 gap-40 py-12 font-mono">
       <div className='flex lg:items-start gap-20 lg:flex-row flex-col items-center'>
         <div className='flex items-center justify-center bg-gray-700 box-border'>
           <div className=' pt-8 pb-8 shadow-xl rounded px-4 flex flex-col w-11/12 lg:w-min' style={{backgroundColor: frameColor}} ref={divRef}>
@@ -46,7 +46,7 @@ function StripCustomization({ setIsStripCustomization }: { setIsStripCustomizati
               }
               {
                 <div className='flex justify-center'>
-                  <p className='text-center w-11/12 break-words text-xl font-serif'>
+                  <p className='text-center w-11/12 break-words text-xl font-mono'>
                     {bottomText}
                   </p>
                 </div>
