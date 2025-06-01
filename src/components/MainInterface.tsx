@@ -17,6 +17,7 @@ function MainInterface({ setIsStripCustomization }: {setIsStripCustomization : R
   const [isAutoCapturing, setIsAutoCapturing] = useState<boolean>(false);
 
   function takePhoto() {
+    console.log(taking);
     setTaking(true);
     setTimeout(() => {
       setTaking(false);
@@ -103,62 +104,64 @@ function MainInterface({ setIsStripCustomization }: {setIsStripCustomization : R
             className="w-full aspect-video object-cover rounded-lg"
           />
           <div className="flex w-full justify-center gap-4 mt-4">
-            {
-              !isAutoCapturing && images.length < 4 &&
-              <motion.button 
-                className="w-full rounded-lg bg-blue-500 text-white text-2xl py-4"
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.5 }}
-                onClick={startCountdown}
-              >
-                Start Auto Capture
-              </motion.button>
-            }
-            {
-              isAutoCapturing &&
-              <motion.button 
-                className="w-full rounded-lg bg-red-500 text-white text-2xl py-4"
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.5 }}
-                onClick={stopAutoCapturing}
-              >
-                Start Auto Capture
-              </motion.button>
-            }
-            {
-              !isAutoCapturing && images.length < 4 &&
-              <motion.button 
-                className="w-full rounded-lg bg-green-500 text-white text-2xl py-4"
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.5 }}
-                onClick={takePhoto}
-              >
-                Capture
-              </motion.button>
-            }
-            {
-              !isAutoCapturing && images.length >= 4 &&
-              <motion.button 
-                className="w-full rounded-lg bg-blue-500 text-white text-2xl py-4"
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.5 }}
-                onClick={() => setIsStripCustomization(true)}
-              >
-                Customize Strip
-              </motion.button>
-            }
+            <AnimatePresence>
+              {
+                !isAutoCapturing && images.length < 4 &&
+                <motion.button 
+                  className="w-full rounded-lg bg-blue-500 text-white text-2xl py-4"
+                  initial={{ scale: 0.9 }}
+                  animate={{ scale: 1 }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                  onClick={startCountdown}
+                >
+                  Start Auto Capture
+                </motion.button>
+              }
+              {
+                isAutoCapturing &&
+                <motion.button 
+                  className="w-full rounded-lg bg-red-500 text-white text-2xl py-4"
+                  initial={{ scale: 0.9 }}
+                  animate={{ scale: 1 }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                  onClick={stopAutoCapturing}
+                >
+                  Start Auto Capture
+                </motion.button>
+              }
+              {
+                !isAutoCapturing && images.length < 4 &&
+                <motion.button 
+                  className="w-full rounded-lg bg-green-500 text-white text-2xl py-4"
+                  initial={{ scale: 0.9 }}
+                  animate={{ scale: 1 }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                  onClick={takePhoto}
+                >
+                  Capture
+                </motion.button>
+              }
+              {
+                !isAutoCapturing && images.length >= 4 &&
+                <motion.button 
+                  className="w-full rounded-lg bg-blue-500 text-white text-2xl py-4"
+                  initial={{ scale: 0.9 }}
+                  animate={{ scale: 1 }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                  onClick={() => setIsStripCustomization(true)}
+                >
+                  Customize Strip
+                </motion.button>
+              }
+            </AnimatePresence>
           </div>
         </div>
         <div className="lg:w-1/3 w-full aspect-video">
