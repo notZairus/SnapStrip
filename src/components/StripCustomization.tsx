@@ -29,9 +29,9 @@ function StripCustomization() {
 
   return (
     <div className="canvas-container w-full min-h-screen flex justify-center items-center bg-gray-700 gap-40 py-12">
-      <div className='flex items-start gap-20'>
+      <div className='flex lg:items-start gap-20 lg:flex-row flex-col items-center'>
         <div className='flex items-center justify-center bg-gray-700 box-border'>
-          <div className=' pt-8 pb-8 shadow-xl rounded px-4 flex flex-col' style={{backgroundColor: frameColor}} ref={divRef}>
+          <div className=' pt-8 pb-8 shadow-xl rounded px-4 flex flex-col w-11/12 lg:w-min' style={{backgroundColor: frameColor}} ref={divRef}>
             <div className='flex flex-col gap-4'>
               {
                 images.map((img) => (
@@ -48,12 +48,12 @@ function StripCustomization() {
             </div>
           </div>
         </div>
-        <div className='flex bg-gray-900 justify-center max-h-screen overflow-y-auto'>
-          <div className='h-min bg-white shadow-xl rounded-xl px-6 pt-4 pb-8'>
+        <div className='flex bg-gray-900 justify-center max-h-screen overflow-y-auto items-center  lg:w-[400px] w-11/12'>
+          <div className='h-min bg-white shadow-xl rounded-xl px-6 pt-4 pb-8 w-full'>
             <h1 className='text-3xl font-semibold'>Strip Customization</h1>
             <div className='mt-4'>
               <p className='text-xl text-gray-500'>Frame Color: </p>
-              <div className='w-[400px] flex justify-between gap-4 mt-2'>
+              <div className=' w-full flex justify-between gap-4 mt-2'>
                 {
                   ["white", "red", "blue", "yellow", "pink", "gray"].map((color) => (
                     <div 

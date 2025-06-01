@@ -99,10 +99,37 @@ function MainInterface({ setIsStripCustomization }: {setIsStripCustomization : R
 
       <main className="w-full mt-6 flex flex-col lg:flex-row gap-10 lg:max-w-7xl lg:mx-auto">
         <div className="flex-1 font-mono">
-          <Webcam 
-            ref={webcamRef}
-            className="w-full aspect-video object-cover rounded-lg"
-          />
+          <div className="w-full rounded-lg relative">
+            <Webcam 
+              ref={webcamRef}
+              className="w-full aspect-video object-cover rounded-lg"
+            />
+            <AnimatePresence>
+              {isAutoCapturing && countdown && countdown > 0 && (
+                <motion.div
+                  key={1}
+                  className="absolute inset-0 flex items-center justify-center"
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1.2, opacity: 1 }}
+                  exit={{ scale: 0.2, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="w-16 h-16 lg:w-24 lg:h-24 rounded-full bg-white/80 text-black font-bold text-3xl lg:text-5xl flex items-center justify-center shadow-lg" >
+                    {countdown}
+                  </div>
+                </motion.div>
+              )}
+              {taking && (
+                <motion.div 
+                  className="absolute inset-0 bg-white/80 flex items-center justify-center rounded-xl pointer-events-none"
+                  initial={{ opacity: 1 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
+            </AnimatePresence>
+          </div>
           <div className="flex w-full justify-center gap-4 mt-4">
             <AnimatePresence>
               {
@@ -130,7 +157,7 @@ function MainInterface({ setIsStripCustomization }: {setIsStripCustomization : R
                   transition={{ duration: 0.5 }}
                   onClick={stopAutoCapturing}
                 >
-                  Start Auto Capture
+                  Stop Auto Capture
                 </motion.button>
               }
               {
