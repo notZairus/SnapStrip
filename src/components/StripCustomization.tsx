@@ -2,6 +2,7 @@ import { useImageContext } from '../contexts/ImageContext';
 import html2canvas from "html2canvas";
 import { useRef, useState } from 'react';
 import { motion } from 'motion/react';
+import ImageCanvas from './ImageCanvas';
 
 
 function StripCustomization() {
@@ -30,11 +31,11 @@ function StripCustomization() {
     <div className="canvas-container w-full min-h-screen flex justify-center items-center bg-gray-700 gap-40 py-12">
       <div className='flex items-start gap-20'>
         <div className='flex items-center justify-center bg-gray-700 box-border'>
-          <div className='w-[250px] pt-8 pb-8 shadow-xl rounded px-4 flex flex-col' style={{backgroundColor: frameColor}} ref={divRef}>
+          <div className=' pt-8 pb-8 shadow-xl rounded px-4 flex flex-col' style={{backgroundColor: frameColor}} ref={divRef}>
             <div className='flex flex-col gap-4'>
               {
                 images.map((img) => (
-                  <img src={img.imageSrc} alt="" className='rounded'/>
+                  <ImageCanvas imageSrc={img.imageSrc} />
                 ))
               }
               {
