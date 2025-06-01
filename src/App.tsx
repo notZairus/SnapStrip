@@ -28,7 +28,7 @@ function App() {
       )}
 
       {!justStarted && isStripCustomization && (
-        <StripCustomization />
+        <StripCustomization setIsStripCustomization={setIsStripCustomization} />
       )}
 
       

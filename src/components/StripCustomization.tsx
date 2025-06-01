@@ -5,11 +5,13 @@ import { motion } from 'motion/react';
 import ImageCanvas from './ImageCanvas';
 
 
-function StripCustomization() {
+function StripCustomization({ setIsStripCustomization }: { setIsStripCustomization: React.Dispatch<React.SetStateAction<boolean>>}) {
   const { images } = useImageContext();
   const [frameColor, setFrameColor] = useState<string>("white");
   const [bottomText, setBottomText] = useState<string>("Bottom Text");
   const divRef = useRef(null);
+
+
 
   
   async function downloadStrip() {
@@ -26,6 +28,10 @@ function StripCustomization() {
 
     link.click();
   } 
+
+  function newSnap() {
+    setIsStripCustomization(false);
+  }
 
   return (
     <div className="canvas-container w-full min-h-screen flex justify-center items-center bg-gray-700 gap-40 py-12">
@@ -85,9 +91,9 @@ function StripCustomization() {
               />
             </div>
   
-            <div className='mt-16'>
+            <div className='mt-16 flex flex-col gap-4'>
               <motion.button
-                className='bg-blue-500 text-white w-full text-3xl py-3 rounded-xl shadow-lg'
+                className='bg-blue-500 text-white w-full text-3xl py-3 rounded-xl shadow-lg border-blue-500'
                 initial={{
                   scale: 0.4,
                 }}
@@ -110,6 +116,31 @@ function StripCustomization() {
                 onClick={downloadStrip}
               >
                 Download
+              </motion.button>
+              <motion.button
+                className='bg-white text-blue-500 border-2 border-blue-500 w-full text-3xl py-3 rounded-xl shadow-lg'
+                initial={{
+                  scale: 0.4,
+                }}
+                animate={{
+                  scale: 1
+                }}
+                whileHover={{
+                  scale: 1.02,
+                  transition: {
+                    duration: 0.2
+                  }
+                }}
+                whileTap={{
+                  scale: 0.9
+                }}
+                transition={{
+                  duration: 0.5,
+                  type: "spring"
+                }}
+                onClick={newSnap}
+              >
+                Edit Snaps
               </motion.button>
             </div>
           </div>
