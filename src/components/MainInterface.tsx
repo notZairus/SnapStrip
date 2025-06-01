@@ -21,6 +21,8 @@ function MainInterface({ setIsStripCustomization }: {setIsStripCustomization : R
     setTimeout(() => {
       setTaking(false);
       let base64 = webcamRef.current?.getScreenshot();
+
+      console.log(base64)
       if (!base64) return;
       
       let newImage: Image = {
@@ -83,182 +85,93 @@ function MainInterface({ setIsStripCustomization }: {setIsStripCustomization : R
     
   }, [images]);
 
+  console.log(images);
+
 
   return (
-    <div className="w-screen box-border p-8 gap-12 flex-col lg:flex-row py-12 flex items-center lg:items-start justify-center">
-      <div className='w-full lg:w-1/2 flex flex-col items-center justify-start gap-8'>
-        <div className='w-full aspect-video flex items-center justify-center overflow-hidden'>
-          <div className="relative rounded-xl w-full h-full flex items-center justify-center">
-            <Webcam 
-              className='rounded-xl w-full h-full object-cover'
-              videoConstraints={{
-                facingMode: "user",
-                width: {ideal: 1920},
-                height: {ideal: 1080}
-              }}
-              ref={webcamRef}
-            />
-            
-            <AnimatePresence>
-              {
-                isAutoCapturing && countdown && countdown > 0 && (
-                  <motion.div
-                    key={1}
-                    className="absolute w-24 aspect-square flex items-center justify-center text-5xl font-semibold text-black rounded-full shadow-lg bg-white/80"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    animate={{ scale: 1.2, opacity: 1 }}
-                    exit={{ scale: 0.2, opacity: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    {countdown}
-                  </motion.div>
-                )
-              }
+    <div className="w-full min-h-screen bg-[#F7FFF6] overflow-x-hidden py-8 px-8">
 
+      <header className="text-center font-mono">
+        <h1 className="text-4xl font-bold">SnapStrip</h1>
+        <p className="text-neutral-500 mt-2">Developed by: Bermillo, Zairus V.</p>
+      </header>
 
-              {taking && <motion.div 
-                className="absolute inset-0 bg-opacity-80 pointer-events-none bg-white rounded-lg flex items-center justify-center text-5xl"
-                initial={{
-                  opacity: 1
-                }}
-                animate={{
-                  opacity: 1
-                }}
-                exit={{
-                  opacity: 0
-                }}
-                transition={{
-                  duration: 0.3,
-                  ease: "easeInOut"
-                  
-                }}
-              > 
-              </motion.div>}
-            </AnimatePresence>
-          </div>
-        </div>
-        <div className='w-full flex items-center justify-center gap-4'>
-          {
-            !isAutoCapturing && images.length < 4 && (
-              <motion.button
-                className="text-white bg-blue-600 px-6 py-2 rounded-lg flex-1 text-2xl"
-                initial={{
-                  scale: 0.8
-                }}
-                animate={{
-                  scale: 1
-                }}
-                whileHover={{
-                  scale: 1.03
-                }}
-                whileTap={{
-                  scale: 0.9
-                }}
-                transition={{
-                  duration: 0.5
-                }}
+      <main className="w-full mt-6 flex flex-col lg:flex-row gap-10 lg:max-w-7xl lg:mx-auto">
+        <div className="flex-1 font-mono">
+          <Webcam 
+            ref={webcamRef}
+            className="w-full aspect-video object-cover rounded-lg"
+          />
+          <div className="flex w-full justify-center gap-4 mt-4">
+            {
+              !isAutoCapturing && images.length < 4 &&
+              <motion.button 
+                className="w-full rounded-lg bg-blue-500 text-white text-2xl py-4"
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.5 }}
                 onClick={startCountdown}
               >
                 Start Auto Capture
               </motion.button>
-            ) 
-          }
-
-          {
-            isAutoCapturing && (
-              <motion.button
-                className="text-white bg-red-600 px-6 py-2 rounded-lg flex-1 text-2xl"
-                initial={{
-                  scale: 0.8
-                }}
-                animate={{
-                  scale: 1
-                }}
-                whileHover={{
-                  scale: 1.03
-                }}
-                whileTap={{
-                  scale: 0.9
-                }}
-                transition={{
-                  duration: 0.5
-                }}
+            }
+            {
+              isAutoCapturing &&
+              <motion.button 
+                className="w-full rounded-lg bg-red-500 text-white text-2xl py-4"
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.5 }}
                 onClick={stopAutoCapturing}
               >
-                Stop Auto Capture
+                Start Auto Capture
               </motion.button>
-            ) 
-          }
-         
-          {
-            !isAutoCapturing && images.length < 4 && (
-              <motion.button
-                className="text-white bg-green-600 px-6 py-2 rounded-lg flex-1 text-2xl"
-                initial={{
-                  scale: 0.8
-                }}
-                animate={{
-                  scale: 1
-                }}
-                whileHover={{
-                  scale: 1.03
-                }}
-                whileTap={{
-                  scale: 0.9
-                }}
-                transition={{
-                  duration: 0.5
-                }}
+            }
+            {
+              !isAutoCapturing && images.length < 4 &&
+              <motion.button 
+                className="w-full rounded-lg bg-green-500 text-white text-2xl py-4"
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.5 }}
                 onClick={takePhoto}
               >
                 Capture
               </motion.button>
-            )
-          }
-          
-          {
-            !isAutoCapturing && images.length >= 4 && (
-              <motion.button
-                className="text-white bg-green-600 px-6 py-2 rounded-lg flex-1 text-2xl"
-                initial={{
-                  scale: 0.8
-                }}
-                animate={{
-                  scale: 1
-                }}
-                whileHover={{
-                  scale: 1.03
-                }}
-                whileTap={{
-                  scale: 0.9
-                }}
-                transition={{
-                  duration: 0.5
-                }}
+            }
+            {
+              !isAutoCapturing && images.length >= 4 &&
+              <motion.button 
+                className="w-full rounded-lg bg-blue-500 text-white text-2xl py-4"
+                initial={{ scale: 0.9 }}
+                animate={{ scale: 1 }}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.5 }}
                 onClick={() => setIsStripCustomization(true)}
               >
-                Next
+                Customize Strip
               </motion.button>
-            )
-          }
+            }
+          </div>
         </div>
-      </div>
-      <div className='w-full lg:w-2/6 overflow-y-auto flex justify-center'>
-        <div className="w-full gap-4 flex flex-col items-center">
-          {
-            images.map((img) => 
-              <ImageCanvas 
-                key={img.id} 
-                imageSrc={img.imageSrc}
-                handleDelete={() => deleteImage(img.id)}
-              />
-            )
-          }
+        <div className="lg:w-1/3 w-full aspect-video">
+          <div className="w-full lg:h-[500px] overflow-y-auto flex flex-col gap-4 overflow-x-hidden  items-center">
+            {
+              images.map((image) => (
+                <ImageCanvas imageSrc={image.imageSrc} handleDelete={() => deleteImage(image.id)}/>
+              ))
+            }
+          </div>
         </div>
-      </div>
+      </main>
+
     </div>
   )
 }

@@ -31,9 +31,9 @@ function ImageCanvas({ imageSrc, handleDelete }: ImageCanvasProps) {
 
   return (
     <div 
-      className='lg:w-[400px] w-full aspect-video rounded-xl relative bg-red-400 flex'
+      className='lg:w-[350px] w-full rounded-xl relative bg-red-400 flex'
     >
-      <canvas ref={canvasRef} className='flex-1 w-full h-full rounded-xl'/>
+      <canvas ref={canvasRef} className='aspect-video w-full h-full rounded-xl object-cover'/>
       <p 
         className='bg-black/20 absolute cursor-pointer top-2 right-3 text-white text-xl w-6 text-center rounded flex items-center justify-center aspect-square'
         onClick={handleDelete}

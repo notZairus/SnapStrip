@@ -1,0 +1,108 @@
+return (
+//     <div className="min-h-screen w-screen bg-[#C7FFDA] py-8 px-4">
+//   <header className="text-center mb-6">
+//     <h1 className="text-4xl font-serif">SnapStrip</h1>
+//     <p className="text-xl text-black/30 mt-1">Developer: Bermillo, Zairus V.</p>
+//   </header>
+
+//   <main className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-start justify-center max-w-7xl mx-auto">
+    
+//     {/* Webcam and Controls */}
+//     <div className="flex-1 w-full flex flex-col gap-6 items-center">
+//       <div className="w-full aspect-video rounded-xl overflow-hidden shadow-md relative">
+//         <Webcam 
+//           className="w-full h-full object-cover"
+//           ref={webcamRef}
+//           videoConstraints={{ facingMode: "user", width: { ideal: 1920 }, height: { ideal: 1080 } }}
+//         />
+//         <AnimatePresence>
+//           {isAutoCapturing && countdown && countdown > 0 && (
+//             <motion.div
+//               key={1}
+//               className="absolute inset-0 flex items-center justify-center"
+//               initial={{ scale: 0.5, opacity: 0 }}
+//               animate={{ scale: 1.2, opacity: 1 }}
+//               exit={{ scale: 0.2, opacity: 0 }}
+//               transition={{ duration: 0.3 }}
+//             >
+//               <div className="w-16 h-16 lg:w-24 lg:h-24 rounded-full bg-white/80 text-black font-bold text-3xl lg:text-5xl flex items-center justify-center shadow-lg" >
+//                 {countdown}
+//               </div>
+//             </motion.div>
+//           )}
+//           {taking && (
+//             <motion.div 
+//               className="absolute inset-0 bg-white/80 flex items-center justify-center rounded-xl pointer-events-none"
+//               initial={{ opacity: 1 }}
+//               animate={{ opacity: 1 }}
+//               exit={{ opacity: 0 }}
+//               transition={{ duration: 0.3 }}
+//             />
+//           )}
+//         </AnimatePresence>
+//       </div>
+
+//       {/* Button Group */}
+//       <div className="w-full flex flex-col sm:flex-row gap-4">
+//         {!isAutoCapturing && images.length < 4 && (
+//           <motion.button
+//             className="flex-1 text-white bg-blue-600 px-6 py-3 rounded-lg text-lg"
+//             whileHover={{ scale: 1.03 }}
+//             whileTap={{ scale: 0.95 }}
+//             onClick={startCountdown}
+//           >
+//             Start Auto Capture
+//           </motion.button>
+//         )}
+
+//         {isAutoCapturing && (
+//           <motion.button
+//             className="flex-1 text-white bg-red-600 px-6 py-3 rounded-lg text-lg"
+//             whileHover={{ scale: 1.03 }}
+//             whileTap={{ scale: 0.95 }}
+//             onClick={stopAutoCapturing}
+//           >
+//             Stop Auto Capture
+//           </motion.button>
+//         )}
+
+//         {!isAutoCapturing && images.length < 4 && (
+//           <motion.button
+//             className="flex-1 text-white bg-green-600 px-6 py-3 rounded-lg text-lg"
+//             whileHover={{ scale: 1.03 }}
+//             whileTap={{ scale: 0.95 }}
+//             onClick={takePhoto}
+//           >
+//             Capture
+//           </motion.button>
+//         )}
+
+//         {!isAutoCapturing && images.length >= 4 && (
+//           <motion.button
+//             className="flex-1 text-white bg-green-600 px-6 py-3 rounded-lg text-lg"
+//             whileHover={{ scale: 1.03 }}
+//             whileTap={{ scale: 0.95 }}
+//             onClick={() => setIsStripCustomization(true)}
+//           >
+//             Next
+//           </motion.button>
+//         )}
+//       </div>
+//     </div>
+
+//     {/* Image Preview */}
+//     <div className="flex-1 w-full max-h-[70vh] overflow-y-auto px-2">
+//       <div className="grid gap-4">
+//         {images.map((img) => (
+//           <div key={img.id} className="w-full bg-white p-2 rounded-xl shadow-md">
+//             <ImageCanvas 
+//               imageSrc={img.imageSrc}
+//               handleDelete={() => deleteImage(img.id)}
+//             />
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   </main>
+// </div>
+//)
